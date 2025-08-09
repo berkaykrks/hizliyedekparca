@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teklif Al - Hızlı Yedek Parça</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        @keyframes pulse-whatsapp {
+          0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+          70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .animate-pulse-whatsapp { animation: pulse-whatsapp 2s infinite; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="text-2xl font-bold text-indigo-600">Hızlı Yedek Parça</a>
+                </div>
+                <nav class="hidden md:flex md:space-x-8">
+                    <a href="index.html" class="font-medium text-gray-500 hover:text-indigo-600">Anasayfa</a>
+                    <a href="hakkimizda.html" class="font-medium text-gray-500 hover:text-indigo-600">Hakkımızda</a>
+                    <a href="markalar.html" class="font-medium text-gray-500 hover:text-indigo-600">Markalar</a>
+                    <a href="iletisim.html" class="font-medium text-gray-500 hover:text-indigo-600">İletişim</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500"><span class="sr-only">Menüyü aç</span><svg class="h-6 w-6" id="menu-open-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg><svg class="h-6 w-6 hidden" id="menu-close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Anasayfa</a>
+                <a href="hakkimizda.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Hakkımızda</a>
+                <a href="markalar.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Markalar</a>
+                <a href="iletisim.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">İletişim</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-16 sm:py-20">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+                <h1 class="text-4xl font-bold text-center mb-4">Parça Sorgula / Teklif Al</h1>
+                <p class="text-center text-gray-600 mb-10">Aracınızın bilgilerini ve aradığınız parçayı girin, size en kısa sürede geri dönüş yapalım.</p>
+                <form id="quote-form" class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+                    <div><label for="q_name" class="block text-sm font-medium text-gray-700">Ad Soyad</label><input type="text" id="q_name" name="from_name" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_email" class="block text-sm font-medium text-gray-700">E-posta Adresiniz</label><input type="email" id="q_email" name="from_email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_phone" class="block text-sm font-medium text-gray-700">Telefon</label><input type="tel" id="q_phone" name="from_phone" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_vehicle" class="block text-sm font-medium text-gray-700">Araç Marka / Model / Yıl</label><input type="text" id="q_vehicle" name="vehicle_info" placeholder="Örn: Ford Focus 2018" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_part" class="block text-sm font-medium text-gray-700">Aradığınız Parça</label><input type="text" id="q_part" name="part_info" placeholder="Örn: Ön fren balatası" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_sase" class="block text-sm font-medium text-gray-700">Şase Numarası</label><input type="text" id="q_sase" name="chassis_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></div>
+                    <div><label for="q_notes" class="block text-sm font-medium text-gray-700">Yorum / Açıklama</label><textarea id="q_notes" name="message" rows="3" placeholder="Ek bilgileri buraya yazabilirsiniz." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500"></textarea></div>
+                    <div><button type="submit" class="w-full bg-indigo-600 text-white py-3 px-4 rounded-md hover:bg-indigo-700 font-semibold text-lg">Teklif İste</button></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p>&copy; 2024 Hızlı Yedek Parça. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Sabit WhatsApp Butonu -->
+    <a href="https://wa.me/905359497495" target="_blank" class="bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center animate-pulse-whatsapp fixed bottom-5 right-5 z-50">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <script>
+        lucide.createIcons();
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            document.getElementById('menu-open-icon').classList.toggle('hidden');
+            document.getElementById('menu-close-icon').classList.toggle('hidden');
+        });
+
+        // --- EMAILJS ENTEGRASYONU ---
+        (function() {
+            emailjs.init({ publicKey: "BuPXvw8_SqA-FYF75" });
+        })();
+        const serviceID = "service_2k1ya0c";
+        const quoteTemplateID = "template_ysn40kn";
+
+        document.getElementById('quote-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Gönderiliyor...';
+
+            emailjs.sendForm(serviceID, quoteTemplateID, this)
+                .then(() => {
+                    submitButton.textContent = 'Başarıyla Gönderildi!';
+                    submitButton.classList.replace('bg-indigo-600', 'bg-green-500');
+                    this.reset();
+                    setTimeout(() => {
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Teklif İste';
+                        submitButton.classList.replace('bg-green-500', 'bg-indigo-600');
+                    }, 5000);
+                }, (err) => {
+                    submitButton.textContent = 'Hata Oluştu!';
+                    submitButton.classList.replace('bg-indigo-600', 'bg-red-500');
+                    alert(`E-posta gönderilemedi. Hata: ${JSON.stringify(err)}`);
+                });
+        });
+    </script>
+</body>
+</html>
